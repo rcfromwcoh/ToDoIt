@@ -35,8 +35,15 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model)
+{
+
+    string extraStuff = "";
+    if (item.DateCompleted != null)
+    {
+        extraStuff = "class=stricken";
+    }
+    <tr @extraStuff>
         <td>
 
                 
@@ -72,7 +79,14 @@
 
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
+            @if (item.DateCompleted != null)
+            {
+                <strike>@Html.DisplayFor(modelItem => item.ItemName)</strike>
+            }
+            else
+            {
+             @Html.DisplayFor(modelItem => item.ItemName)
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemNote)
